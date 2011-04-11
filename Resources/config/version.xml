@@ -6,11 +6,16 @@
 
     <parameters>
         <parameter key="zenstruck.version.manager.class">Zenstruck\VersionBundle\VersionManager</parameter>
+        <parameter key="zenstruck.version.controller.class">Zenstruck\VersionBundle\Controller\VersionController</parameter>
     </parameters>
 
     <services>
         <service id="zenstruck.version.manager" class="%zenstruck.version.manager.class%">
             <argument />
+        </service>
+
+        <service id="zenstruck.version.controller" class="%zenstruck.version.controller.class%">
+            <argument type="service" id="zenstruck.version.manager" />
         </service>
     </services>
 </container>

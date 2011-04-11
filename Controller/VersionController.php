@@ -2,15 +2,21 @@
 
 namespace Zenstruck\VersionBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Zenstruck\VersionBundle\VersionManager;
 use Symfony\Component\HttpFoundation\Response;
 
-class VersionController extends Controller
+class VersionController
 {
-    public function showAction()
-    {        
-        $version = $this->get('zenstruck.version.manager')->getVersion();
+    protected $versionManager;
 
-        return new Response($version);
+    public function __construct(VersionManager $manager)
+    {
+        $this->versionManager = $manager;
+    }
+
+
+    public function showAction()
+    {   
+        return new Response($this->versionManager->getVersion());
     }
 }
