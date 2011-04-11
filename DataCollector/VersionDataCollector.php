@@ -19,6 +19,11 @@ class VersionDataCollector extends DataCollector
         $this->setVersion(file_get_contents($filename));
     }
 
+    public function  __toString()
+    {
+        return $this->data['version'];
+    }
+
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         // do nothing

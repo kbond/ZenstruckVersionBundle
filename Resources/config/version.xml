@@ -11,10 +11,11 @@
     <services>
         <service id="data_collector.version" class="Zenstruck\VersionBundle\DataCollector\VersionDataCollector">
             <argument /> <!-- file -->
-            <tag name="data_collector" template="ZenstruckVersionBundle:Version:collector" id="version" />
+            <tag name="data_collector" template="ZenstruckVersionBundle:Version:toolbar" id="version" />
         </service>
 
         <service id="zenstruck.version.controller" class="%zenstruck.version.controller.class%">
+            <argument type="service" id="templating" />
             <argument type="service" id="data_collector.version" />
         </service>
     </services>
