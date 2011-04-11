@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\VersionBundle;
+namespace Zenstruck\VersionBundle\Listener;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
