@@ -12,7 +12,7 @@ current version in perhaps a ``meta`` tag for your production environment.
 
 1. Add this bundle and php-github-api to your Symfony2 project:
 
-        $ git submodule add git://github.com/kbond/GithubCMSBundle.git vendor/bundles/Zenstruck/VersionBundle
+        $ git submodule add git://github.com/kbond/VersionBundle.git vendor/bundles/Zenstruck/VersionBundle
 
 2. Add the ``Zenstruck`` namespace to your autoloader:
 
@@ -22,16 +22,47 @@ current version in perhaps a ``meta`` tag for your production environment.
            // your other namespaces
         ));
 
+3. Add this bundle to your application's kernel:
+
+        // app/AppKernel.php
+         public function registerBundles()
+         {
+             return array(
+                 // ...
+                 new Zenstruck\VersionBundle\VersionBundle(),
+                 // ...
+             );
+         }
+
+4. Create a ``VERSION`` file in your project's root directory
+
+5. Add configuration
+
+        # Example
+        # app/config_dev.yml
+        zenstruck_version:
+            enabled: true
+            toolbar: true
+
+        #app/config_staging.yml
+        zenstruck_version:
+            enabled: true
+            toolbar: false
+            block:
+                enabled: true
+
+
 # Default Configuration
 
     # config.yml
     zenstruck_version:
-        enabled: false # enable/disable service
-        toolbar: false # show in web debug toolbar
+        enabled: false                      # enable/disable service
+        toolbar: false                      # show in web debug toolbar
+        file: %kernel.root_dir%/../VERSION  # the file containing version info
         block:
-          enabled: false # enable/disable block
-          position: vb-bottom-right # other values: vb-bottom-left, vb-top-right, vb-top-left
-          prefix: "Version: "
+          enabled: false                    # enable/disable block
+          position: vb-bottom-right         # other values: vb-bottom-left, vb-top-right, vb-top-left
+          prefix: "Version: "               # text added to beginning of block
 
 # Usage
 
@@ -41,15 +72,17 @@ Access service in a controller:
     public function indexAction()
     { 
         $version = $this->get('data_collector.version')->getVersion();
-
         ...
     }
     ...
 
-Render a version ``meta`` tag:
+Render in template - uses overridable 'show.html.twig' template:
+
+    {# twig template #}
+    {% render "zenstruck.version.controller:showAction" %}
+
+Render a ``meta`` tag - use rawAction to get just the string:
 
     ...
-
-    <meta name="version" content="{% render "zenstruck.version.controller:showAction" %}" />
-
+    <meta name="version" content="{% render "zenstruck.version.controller:rawAction" %}" />
     ...
