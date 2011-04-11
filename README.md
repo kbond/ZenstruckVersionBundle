@@ -26,8 +26,29 @@ current version in perhaps a ``meta`` tag for your production environment.
 
     # config.yml
     zenstruck_version:
-        enabled: false
+        enabled: false # enable/disable service
         block:
-          enabled: false
+          enabled: false # enable/disable block
           position: vb-bottom-right # other values: vb-bottom-left, vb-top-right, vb-top-left
           prefix: "Version: "
+
+# Usage
+
+Access service in a controller:
+
+    ...
+    public function indexAction()
+    { 
+        $version = $this->get('zenstruck.version.manager')->getVersion();
+
+        ...
+    }
+    ...
+
+Render a version ``meta`` tag:
+
+    ...
+
+    <meta name="version" content="{% render "ZenstruckVersionBundle:Version:show" %}" />
+
+    ...
