@@ -12,7 +12,7 @@
         <service id="zenstruck.version.block" class="%zenstruck.version.response.class%">
             <tag name="kernel.listener" event="onCoreResponse" priority="-128" />
             <argument type="service" id="templating.engine.twig" />
-            <argument type="service" id="zenstruck.version.manager" />
+            <argument type="service" id="data_collector.version" />
             <argument /> <!-- position -->
             <argument /> <!-- prefix -->
         </service>

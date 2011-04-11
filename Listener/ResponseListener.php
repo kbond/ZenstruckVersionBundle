@@ -5,19 +5,19 @@ namespace Zenstruck\VersionBundle\Listener;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Bundle\TwigBundle\TwigEngine;
-use Zenstruck\VersionBundle\VersionManager;
+use Zenstruck\VersionBundle\DataCollector\VersionDataCollector;
 
 class ResponseListener
 {
     protected $templating;
-    protected $versionManager;
+    protected $collector;
     protected $position;
     protected $prefix;
 
-    public function __construct(TwigEngine $templating, VersionManager $version, $position, $prefix)
+    public function __construct(TwigEngine $templating, VersionDataCollector $version, $position, $prefix)
     {
         $this->templating = $templating;
-        $this->versionManager = $version;
+        $this->collector = $version;
         $this->position = $position;
         $this->prefix = $prefix;
     }
@@ -59,7 +59,7 @@ class ResponseListener
         if (false !== $pos = $posrFunction($content, '</body>')) {
             $toolbar = "\n" . str_replace("\n", '', $this->templating->render(
                                     'ZenstruckVersionBundle:Version:block.html.twig', array(
-                                        'versionManager' => $this->versionManager,
+                                        'collector' => $this->collector,
                                         'position' => $this->position,
                                         'prefix' => $this->prefix
                     ))) . "\n";

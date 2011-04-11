@@ -23,8 +23,11 @@ class ZenstruckVersionExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('version.xml');
 
-        $container->getDefinition('zenstruck.version.manager')
+        $container->getDefinition('data_collector.version')
                 ->setArgument(0, $config['file']);
+
+        if (!$config['toolbar'])
+            $container->getDefinition('data_collector.version')->setTags(array());
 
         if ($config['block']['enabled']) {
             $loader->load('block.xml');

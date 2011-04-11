@@ -27,6 +27,7 @@ current version in perhaps a ``meta`` tag for your production environment.
     # config.yml
     zenstruck_version:
         enabled: false # enable/disable service
+        toolbar: false # show in web debug toolbar
         block:
           enabled: false # enable/disable block
           position: vb-bottom-right # other values: vb-bottom-left, vb-top-right, vb-top-left
@@ -39,7 +40,7 @@ Access service in a controller:
     ...
     public function indexAction()
     { 
-        $version = $this->get('zenstruck.version.manager')->getVersion();
+        $version = $this->get('data_collector.version')->getVersion();
 
         ...
     }
