@@ -8,8 +8,11 @@ class VersionManager
 
     public function __construct($filename)
     {
-        if (!file_exists($filename))
-            throw new \Exception('Version file set in your config does not exist.');
+        if (!file_exists($filename)) {
+            $this->version = 'File "'.$filename.'" does not exist';
+            return;
+        }
+            
             
         $this->version = file_get_contents($filename);
 

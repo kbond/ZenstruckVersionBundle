@@ -25,6 +25,16 @@ class ResponseListener
     public function onCoreResponse(FilterResponseEvent $event)
     {
         $response = $event->getResponse();
+        $request = $event->getRequest();
+
+        // do not show for profiler
+        if (!$response->headers->has('X-Debug-Token')
+            || '3' === substr($response->getStatusCode(), 0, 1)
+            || ($response->headers->has('Content-Type') && false === strpos($response->headers->get('Content-Type'), 'html'))
+            || 'html' !== $request->getRequestFormat()
+        ) {
+            return;
+        }
 
         $this->injectBlock($response);
     }
