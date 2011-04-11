@@ -49,6 +49,6 @@ Render a version ``meta`` tag:
 
     ...
 
-    <meta name="version" content="{% render "ZenstruckVersionBundle:Version:show" %}" />
+    <meta name="version" content="{% render "zenstruck.version.controller:showAction" %}" />
 
     ...
