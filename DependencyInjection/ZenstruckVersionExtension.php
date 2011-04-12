@@ -29,7 +29,7 @@ class ZenstruckVersionExtension extends Extension
         if (!$config['toolbar'])
             $container->getDefinition('data_collector.version')->setTags(array());
 
-        if ($config['block']['enabled']) {
+        if (isset($config['block']) && $config['block']['enabled']) {
             $loader->load('block.xml');
             $container->getDefinition('zenstruck.version.block')
                 ->setArgument(2, $config['block']['position'])
