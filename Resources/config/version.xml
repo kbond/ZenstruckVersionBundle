@@ -6,10 +6,11 @@
 
     <parameters>        
         <parameter key="zenstruck.version.controller.class">Zenstruck\VersionBundle\Controller\VersionController</parameter>
+        <parameter key="data_collector.version.class">Zenstruck\VersionBundle\DataCollector\VersionDataCollector</parameter>
     </parameters>
 
     <services>
-        <service id="data_collector.version" class="Zenstruck\VersionBundle\DataCollector\VersionDataCollector">
+        <service id="data_collector.version" class="%data_collector.version.class%">
             <argument /> <!-- file -->
             <tag name="data_collector" template="ZenstruckVersionBundle:Version:toolbar" id="version" />
         </service>
