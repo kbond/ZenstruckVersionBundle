@@ -16,8 +16,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->booleanNode('enabled')->defaultFalse()->end()
                 ->node('file', 'variable')->defaultValue('%kernel.root_dir%/../VERSION')->end()
-                ->booleanNode('helper')->defaultTrue()->end()
-                ->booleanNode('twig')->defaultTrue()->end()
                 ->booleanNode('toolbar')->defaultFalse()->end()
                 ->arrayNode('block')
                     ->children()

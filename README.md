@@ -71,18 +71,18 @@ Access service in a controller:
     ...
     public function indexAction()
     { 
-        $version = $this->get('data_collector.version')->getVersion();
+        $version = $this->get('zenstruck.version.data_collector')->getVersion();
         ...
     }
     ...
 
-Render in template - uses overridable 'show.html.twig' template:
+Render in template - uses twig function ``version()``:
 
     {# twig template #}
-    {% render "zenstruck.version.controller:showAction" %}
+    {{ version() }}
 
-Render a ``meta`` tag - use rawAction to get just the string:
+**Example** Render a ``meta`` tag with version:
 
     ...
-    <meta name="version" content="{% render "zenstruck.version.controller:rawAction" %}" />
+    <meta name="version" content="{{ version() }}" />
     ...
