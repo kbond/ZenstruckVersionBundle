@@ -10,14 +10,12 @@ use Zenstruck\VersionBundle\DataCollector\VersionDataCollector;
 class ResponseListener
 {
     protected $templating;
-    protected $collector;
     protected $position;
     protected $prefix;
 
-    public function __construct(TwigEngine $templating, VersionDataCollector $version, $position, $prefix)
+    public function __construct(TwigEngine $templating, $position, $prefix)
     {
         $this->templating = $templating;
-        $this->collector = $version;
         $this->position = $position;
         $this->prefix = $prefix;
     }
@@ -59,7 +57,6 @@ class ResponseListener
         if (false !== $pos = $posrFunction($content, '</body>')) {
             $toolbar = "\n" . str_replace("\n", '', $this->templating->render(
                                     'ZenstruckVersionBundle:Version:block.html.twig', array(
-                                        'collector' => $this->collector,
                                         'position' => $this->position,
                                         'prefix' => $this->prefix
                     ))) . "\n";

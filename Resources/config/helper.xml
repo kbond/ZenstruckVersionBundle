@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="zenstruck.version.templating.helper" class="Zenstruck\VersionBundle\Helper\VersionHelper">
+            <argument type="service" id="zenstruck.version.data_collector" />
+            <tag name="templating.helper" alias="version" />
+        </service>
+    </services>
+</container>

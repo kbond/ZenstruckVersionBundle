@@ -23,17 +23,23 @@ class ZenstruckVersionExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('version.xml');
 
-        $container->getDefinition('data_collector.version')
+        $container->getDefinition('zenstruck.version.data_collector')
                 ->setArgument(0, $config['file']);
 
+        if ($config['helper'])
+            $loader->load('helper.xml');
+
+        if ($config['twig'])
+            $loader->load('twig.xml');
+
         if (!$config['toolbar'])
-            $container->getDefinition('data_collector.version')->setTags(array());
+            $container->getDefinition('zenstruck.version.data_collector')->setTags(array());
 
         if (isset($config['block']) && $config['block']['enabled']) {
             $loader->load('block.xml');
             $container->getDefinition('zenstruck.version.block')
-                ->setArgument(2, $config['block']['position'])
-                ->setArgument(3, $config['block']['prefix']);
+                ->setArgument(1, $config['block']['position'])
+                ->setArgument(2, $config['block']['prefix']);
         }        
     }
 

@@ -12,7 +12,7 @@ class VersionDataCollector extends DataCollector
     public function __construct($filename)
     {
         if (!file_exists($filename)) {
-            $this->setVersion('File "' . $filename . '" does not exist');
+            $this->setVersion('Version file "' . $filename . '" does not exist');
             return;
         }
 
