@@ -25,8 +25,9 @@ class ZenstruckVersionExtension extends Extension
         $loader->load('helper.xml');
         $loader->load('twig.xml');
 
-        $container->getDefinition('zenstruck.version.data_collector')
-                ->setArgument(0, $config['file']);
+        if ($config['file'])
+            $container->getDefinition('zenstruck.version.data_collector')
+                    ->addArgument($config['file']);
 
         if (!$config['toolbar'])
             $container->getDefinition('zenstruck.version.data_collector')->setTags(array());

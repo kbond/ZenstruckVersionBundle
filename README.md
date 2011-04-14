@@ -86,3 +86,25 @@ Render in template - uses twig function ``version()``:
     ...
     <meta name="version" content="{{ version() }}" />
     ...
+
+
+# Use your own Version DataCollector
+
+1. Overrride the default ``VersionDataCollector`` class:
+
+        // MyVersion.php
+        use Zenstruck\VersionBundle\DataCollector\VersionDataCollector;
+
+        class MyVersion extends VersionDataCollector
+        {
+            public function getVersion()
+            {
+                return $myversion;
+            }
+        }
+
+2. Set you ``VersionDataCollector`` class in ``app/config.yml``:
+
+        // app/config.yml
+        parameters:
+            zenstruck.version.data_collector.class: \MyVersion

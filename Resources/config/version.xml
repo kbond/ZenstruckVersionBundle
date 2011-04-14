@@ -9,8 +9,7 @@
     </parameters>
 
     <services>
-        <service id="zenstruck.version.data_collector" class="%zenstruck.version.data_collector.class%">
-            <argument /> <!-- file -->
+        <service id="zenstruck.version.data_collector" class="%zenstruck.version.data_collector.class%">            
             <tag name="data_collector" template="ZenstruckVersionBundle:Version:toolbar" id="version" />
         </service>
     </services>
