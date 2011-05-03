@@ -57,8 +57,10 @@ current version in perhaps a ``meta`` tag for your production environment.
     # config.yml
     zenstruck_version:
         enabled: false                      # enable/disable service
-        toolbar: false                      # show in web debug toolbar
+        toolbar: false                      # show in web debug toolbar        
         file: %kernel.root_dir%/../VERSION  # the file containing version info
+        text: ~                             # suffix text (ie "-dev")
+        version: ~                          # overrides file/text with custom version
         block:
           enabled: false                    # enable/disable block
           position: vb-bottom-right         # other values: vb-bottom-left, vb-top-right, vb-top-left

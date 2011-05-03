@@ -20,24 +20,35 @@ class ZenstruckVersionExtension extends Extension
         if (!$config['enabled'])
             return;
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('version.xml');
         $loader->load('helper.xml');
         $loader->load('twig.xml');
 
-        if ($config['file'])
+        if ($config['version'])
             $container->getDefinition('zenstruck.version.data_collector')
-                    ->addArgument($config['file']);
+                    ->replaceArgument(1, $config['version']);
+        else
+        {
+            if ($config['file'])
+                $container->getDefinition('zenstruck.version.data_collector')
+                    ->replaceArgument(0, $config['file']);
+
+            if ($config['text'])
+                $container->getDefinition('zenstruck.version.data_collector')
+                    ->replaceArgument(1, $config['text']);
+        }
 
         if (!$config['toolbar'])
             $container->getDefinition('zenstruck.version.data_collector')->setTags(array());
 
-        if (isset($config['block']) && $config['block']['enabled']) {
+        if (isset($config['block']) && $config['block']['enabled'])
+        {
             $loader->load('block.xml');
             $container->getDefinition('zenstruck.version.block')
-                ->setArgument(1, $config['block']['position'])
-                ->setArgument(2, $config['block']['prefix']);
-        }        
+                    ->replaceArgument(1, $config['block']['position'])
+                    ->replaceArgument(2, $config['block']['prefix']);
+        }
     }
 
 }

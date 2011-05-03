@@ -9,14 +9,19 @@ use Symfony\Component\HttpFoundation\Response;
 class VersionDataCollector extends DataCollector
 {
 
-    public function __construct($filename)
-    {
-        if (!file_exists($filename)) {
+    public function __construct($filename = null, $text = null)
+    {   
+        if (!file_exists($filename) && !$text) {
             $this->setVersion('n/a');
             return;
-        }
-
-        $this->setVersion(file_get_contents($filename));
+        }        
+        
+        $version = '';
+        
+        if (file_exists($filename))
+            $version .= file_get_contents($filename);
+        
+        $this->setVersion($version.$text);
     }
 
     public function  __toString()
