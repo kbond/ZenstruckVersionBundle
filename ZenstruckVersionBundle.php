@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\VersionBundle;
+namespace Zenstruck\Bundle\VersionBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

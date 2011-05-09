@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\VersionBundle\DataCollector;
+namespace Zenstruck\Bundle\VersionBundle\DataCollector;
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;

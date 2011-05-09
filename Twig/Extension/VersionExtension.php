@@ -1,8 +1,8 @@
 <?php
 
-namespace Zenstruck\VersionBundle\Twig\Extension;
+namespace Zenstruck\Bundle\VersionBundle\Twig\Extension;
 
-use Zenstruck\VersionBundle\Helper\VersionHelper;
+use Zenstruck\Bundle\VersionBundle\Helper\VersionHelper;
 
 class VersionExtension extends \Twig_Extension
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Zenstruck\VersionBundle\Helper;
+namespace Zenstruck\Bundle\VersionBundle\Helper;
 
 use Symfony\Component\Templating\Helper\HelperInterface;
-use Zenstruck\VersionBundle\DataCollector\VersionDataCollector;
+use Zenstruck\Bundle\VersionBundle\DataCollector\VersionDataCollector;
 
 class VersionHelper implements HelperInterface
 {

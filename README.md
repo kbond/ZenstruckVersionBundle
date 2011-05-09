@@ -29,7 +29,7 @@ current version in perhaps a ``meta`` tag for your production environment.
          {
              return array(
                  // ...
-                 new Zenstruck\VersionBundle\VersionBundle(),
+                 new Zenstruck\Bundle\VersionBundle\VersionBundle(),
                  // ...
              );
          }
@@ -95,7 +95,7 @@ Render in template - uses twig function ``version()``:
 1. Overrride the default ``VersionDataCollector`` class:
 
         // MyVersion.php
-        use Zenstruck\VersionBundle\DataCollector\VersionDataCollector;
+        use Zenstruck\Bundle\VersionBundle\DataCollector\VersionDataCollector;
 
         class MyVersion extends VersionDataCollector
         {

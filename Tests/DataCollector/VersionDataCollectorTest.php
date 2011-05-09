@@ -1,8 +1,8 @@
 <?php
 
-namespace Zenstruck\VersionBundle\Tests\DataCollector;
+namespace Zenstruck\Bundle\VersionBundle\Tests\DataCollector;
 
-use Zenstruck\VersionBundle\DataCollector\VersionDataCollector;
+use Zenstruck\Bundle\VersionBundle\DataCollector\VersionDataCollector;
 
 class VersionDataCollectorTest extends \PHPUnit_Framework_TestCase
 {

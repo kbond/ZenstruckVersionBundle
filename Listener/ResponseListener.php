@@ -1,11 +1,11 @@
 <?php
 
-namespace Zenstruck\VersionBundle\Listener;
+namespace Zenstruck\Bundle\VersionBundle\Listener;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Bundle\TwigBundle\TwigEngine;
-use Zenstruck\VersionBundle\DataCollector\VersionDataCollector;
+use Zenstruck\Bundle\VersionBundle\DataCollector\VersionDataCollector;
 
 class ResponseListener
 {
