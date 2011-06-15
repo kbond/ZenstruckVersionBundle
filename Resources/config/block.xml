@@ -10,7 +10,7 @@
 
     <services>
         <service id="zenstruck.version.block" class="%zenstruck.version.response.class%">
-            <tag name="kernel.listener" event="onCoreResponse" priority="-128" />
+            <tag name="kernel.listener" event="core.response" method="onCoreResponse" priority="-128" />
             <argument type="service" id="templating.engine.twig" />
             <argument /> <!-- position -->
             <argument /> <!-- prefix -->
