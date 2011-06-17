@@ -34,9 +34,9 @@ class ZenstruckVersionExtension extends Extension
                 $container->getDefinition('zenstruck.version.data_collector')
                     ->replaceArgument(0, $config['file']);
 
-            if ($config['text'])
+            if ($config['suffix'])
                 $container->getDefinition('zenstruck.version.data_collector')
-                    ->replaceArgument(1, $config['text']);
+                    ->replaceArgument(1, $config['suffix']);
         }
 
         if (!$config['toolbar'])
