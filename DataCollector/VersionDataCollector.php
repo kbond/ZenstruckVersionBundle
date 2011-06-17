@@ -5,6 +5,7 @@ namespace Zenstruck\Bundle\VersionBundle\DataCollector;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Kernel;
 
 class VersionDataCollector extends DataCollector
 {
@@ -42,6 +43,11 @@ class VersionDataCollector extends DataCollector
     public function getVersion()
     {
         return $this->data['version'];
+    }
+
+    public function getSymfony()
+    {
+        return Kernel::VERSION;
     }
 
     public function getName()

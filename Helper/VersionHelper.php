@@ -3,7 +3,6 @@
 namespace Zenstruck\Bundle\VersionBundle\Helper;
 
 use Symfony\Component\Templating\Helper\HelperInterface;
-use Symfony\Component\HttpKernel\Kernel;
 use Zenstruck\Bundle\VersionBundle\DataCollector\VersionDataCollector;
 
 class VersionHelper implements HelperInterface
@@ -53,7 +52,7 @@ class VersionHelper implements HelperInterface
 
     public function getSymfony()
     {
-        return Kernel::VERSION;
+        return $this->collector->getSymfony();
     }
 
 }
