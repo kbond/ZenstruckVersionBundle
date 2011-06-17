@@ -3,6 +3,7 @@
 namespace Zenstruck\Bundle\VersionBundle\Helper;
 
 use Symfony\Component\Templating\Helper\HelperInterface;
+use Symfony\Component\HttpKernel\Kernel;
 use Zenstruck\Bundle\VersionBundle\DataCollector\VersionDataCollector;
 
 class VersionHelper implements HelperInterface
@@ -44,10 +45,15 @@ class VersionHelper implements HelperInterface
     {
         return $this->charset;
     }
-    
+
     public function getVersion()
     {
         return $this->collector->getVersion();
+    }
+
+    public function getSymfony()
+    {
+        return Kernel::VERSION;
     }
 
 }

@@ -23,12 +23,18 @@ class VersionExtension extends \Twig_Extension
     {
         return array(
             'version' => new \Twig_Function_Method($this, 'version', array('is_safe' => array('html'))),
+            'symfony' => new \Twig_Function_Method($this, 'symfony', array('is_safe' => array('html'))),
         );
     }
 
     public function version()
     {
         return $this->helper->getVersion();
+    }
+
+    public function symfony()
+    {
+        return $this->helper->getSymfony();
     }
 
 }
