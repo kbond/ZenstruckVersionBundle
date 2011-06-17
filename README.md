@@ -1,42 +1,25 @@
 # Introduction
 
-Keep track of your Symfony2 project's version.  Knowing what build/version number
-a project in staging/production is important.
+Keep track of your Symfony2 application's version.  Knowing what build/version number
+an application in staging/production is important.
 
 Many projects have a VERSION or BUILD file created by the developer or CI server.
-This bundle provides a block to display on your staging/dev environment.  The
-version is available throughout your project as a service.  You can inject the
-current version in perhaps a ``meta`` tag for your production environment.
+This bundle provides a block, twig function, and web debug toolbar panel to output
+both the application's and Symfony's version.  The version is available throughout
+your project as a service.  You can inject the current version in perhaps a ``meta``
+tag for your production environment.
 
 # Installation
 
-1. Add this bundle and php-github-api to your Symfony2 project:
+1. Add this bundle to your Symfony2 project (ie ``vendor/bundles/Zenstruck/VersionBundle``)
 
-        $ git submodule add git://github.com/kbond/VersionBundle.git vendor/bundles/Zenstruck/VersionBundle
+2. Add the ``Zenstruck`` namespace to your autoloader (``'Zenstruck' => __DIR__.'/../vendor/bundles'``)
 
-2. Add the ``Zenstruck`` namespace to your autoloader:
-
-        // app/autoload.php
-        $loader->registerNamespaces(array(
-           'Zenstruck' => __DIR__.'/../vendor/bundles',
-           // your other namespaces
-        ));
-
-3. Add this bundle to your application's kernel:
-
-        // app/AppKernel.php
-         public function registerBundles()
-         {
-             return array(
-                 // ...
-                 new Zenstruck\Bundle\VersionBundle\VersionBundle(),
-                 // ...
-             );
-         }
+3. Add this bundle to your application's kernel (``new Zenstruck\Bundle\VersionBundle\VersionBundle()``)
 
 4. Create a ``VERSION`` file in your project's root directory
 
-5. Add configuration
+5. Configure the bundle:
 
         # Example
         # app/config_dev.yml
@@ -51,46 +34,49 @@ current version in perhaps a ``meta`` tag for your production environment.
             block:
                 enabled: true
 
-
-# Default Configuration
-
-    # config.yml
-    zenstruck_version:
-        enabled: false                      # enable/disable service
-        toolbar: false                      # show in web debug toolbar        
-        file: %kernel.root_dir%/../VERSION  # the file containing version info
-        text: ~                             # suffix text (ie "-dev")
-        version: ~                          # overrides file/text with custom version
-        block:
-          enabled: false                    # enable/disable block
-          position: vb-bottom-right         # other values: vb-bottom-left, vb-top-right, vb-top-left
-          prefix: "Version: "               # text added to beginning of block
-
 # Usage
+
+When enabled, this plugin defines two twig functions:
+
+* ``version()``: outputs the current application version (as defined in your ``VERSION`` file)
+* ``symfony()``: outputs the current Symfony version (as defined in ``Symfony\Component\HttpKernel\Kernel::VERSION``)
+
+And adds a service to Symfony's service container:
+
+* ``zenstruck.version.data_collector``
+
+# Examples
 
 Access service in a controller:
 
     ...
     public function indexAction()
-    { 
-        $version = $this->get('zenstruck.version.data_collector')->getVersion();
+    {
+        $versionDC = $this->get('zenstruck.version.data_collector');
+
+        $appVersion = $versionDC->getVersion();
+        $symfonyVersion = $versionDC->getSymfony();
         ...
     }
     ...
 
-Render in template - uses twig function ``version()``:
+Render in template:
 
     {# twig template #}
     {{ version() }}
+    {{ symfony() }}
 
-**Example** Render a ``meta`` tag with version:
+Render a ``meta`` tag with application version and Symfony version:
 
     ...
     <meta name="version" content="{{ version() }}" />
+    <meta name="symfony" content="{{ symfony() }}" />
     ...
 
 
-# Use your own Version DataCollector
+# Extend
+
+## Use your own Version DataCollector
 
 1. Overrride the default ``VersionDataCollector`` class:
 
@@ -110,3 +96,21 @@ Render in template - uses twig function ``version()``:
         // app/config.yml
         parameters:
             zenstruck.version.data_collector.class: \MyVersion
+
+# Full Default Configuration
+
+    # config.yml
+    zenstruck_version:
+        enabled: false                      # enable/disable service
+        toolbar: false                      # show in web debug toolbar
+        file: %kernel.root_dir%/../VERSION  # the file containing version info
+        suffix: ~                           # suffix text (ie "-dev")
+        version: ~                          # overrides file/text with custom version
+        block:
+          enabled: false                    # enable/disable block
+          position: vb-bottom-right         # other values: vb-bottom-left, vb-top-right, vb-top-left
+          prefix: "Version: "               # text added to beginning of block
+
+# TODO
+
+1. Integrate with [composer](http://github.com/naderman/composer).
