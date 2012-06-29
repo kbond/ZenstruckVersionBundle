@@ -11,15 +11,20 @@ tag for your production environment.
 
 # Installation
 
-1. Add this bundle to your Symfony2 project (ie ``vendor/bundles/Zenstruck/VersionBundle``)
+1. Install the bundle through composer :
 
-2. Add the ``Zenstruck`` namespace to your autoloader (``'Zenstruck' => __DIR__.'/../vendor/bundles'``)
+``` javascript
+{
+    "require": {
+        // ...
+        "zenstruck/version-bundle": "dev-master"
+    }
+}
+```
 
-3. Add this bundle to your application's kernel (``new Zenstruck\Bundle\VersionBundle\VersionBundle()``)
+2. Create a ``VERSION`` file in your project's root directory
 
-4. Create a ``VERSION`` file in your project's root directory
-
-5. Configure the bundle:
+3. Configure the bundle:
 
         # Example
         # app/config_dev.yml
@@ -110,7 +115,3 @@ Render a ``meta`` tag with application version and Symfony version:
           enabled: false                    # enable/disable block
           position: vb-bottom-right         # other values: vb-bottom-left, vb-top-right, vb-top-left
           prefix: "Version: "               # text added to beginning of block
-
-# TODO
-
-1. Integrate with [composer](http://github.com/naderman/composer).
