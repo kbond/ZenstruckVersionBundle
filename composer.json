@@ -1,0 +1,22 @@
+{
+    "name": "zenstruck/version-bundle",
+    "description": "Keep track of your Symfony2 application's version",
+    "keywords": ["version"],
+    "homepage": "http://zenstruck.com/project/ZenstruckVersionBundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Bond",
+            "email": "kevinbond@gmail.com"
+        }
+    ],
+    "require": {
+        "php":              ">=5.3.0",
+        "symfony/symfony":  "2.1.*"
+    },
+    "autoload": {
+        "psr-0": { "Zenstruck\\Bundle\\VersionBundle": "" }
+    },
+    "target-dir": "Zenstruck/Bundle/VersionBundle"
+}
