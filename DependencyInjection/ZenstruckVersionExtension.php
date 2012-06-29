@@ -27,7 +27,7 @@ class ZenstruckVersionExtension extends Extension
         $loader->load('helper.xml');
         $loader->load('twig.xml');
 
-        if (version_compare(Kernel::VERSION, '2.1.0', '<')) {
+        if (version_compare(ZenstruckVersionBundle::getSymfonyVersion(Kernel::VERSION), '2.1.0', '<')) {
             $tagForOldSymfony = array (
                 'data_collector' =>
                 array (
