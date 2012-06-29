@@ -7,6 +7,8 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\HttpKernel\Kernel;
+use Zenstruck\Bundle\VersionBundle\ZenstruckVersionBundle;
 
 class ZenstruckVersionExtension extends Extension
 {
@@ -24,6 +26,22 @@ class ZenstruckVersionExtension extends Extension
         $loader->load('version.xml');
         $loader->load('helper.xml');
         $loader->load('twig.xml');
+
+        if (version_compare(ZenstruckVersionBundle::getSymfonyVersion(Kernel::VERSION), '2.1.0', '<')) {
+            $tagForOldSymfony = array (
+                'data_collector' =>
+                array (
+                    0 =>
+                    array (
+                        'template'  => 'ZenstruckVersionBundle:Version:toolbar2.0',
+                        'id'        => 'version',
+                    ),
+                ),
+            );
+
+            $container->getDefinition('zenstruck.version.data_collector')->clearTag('data_collector');
+            $container->getDefinition('zenstruck.version.data_collector')->setTags($tagForOldSymfony);
+        }
 
         if ($config['version'])
             $container->getDefinition('zenstruck.version.data_collector')
