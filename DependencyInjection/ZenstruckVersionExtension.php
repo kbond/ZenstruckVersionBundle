@@ -27,7 +27,7 @@ class ZenstruckVersionExtension extends Extension
         $loader->load('helper.xml');
         $loader->load('twig.xml');
 
-        if (version_compare(ZenstruckVersionBundle::getSymfonyVersion(Kernel::VERSION), '2.1.0', '<')) {
+        if (version_compare(Kernel::VERSION, '2.1.0', '<')) {
             $tagForOldSymfony = array (
                 'data_collector' =>
                 array (
@@ -39,7 +39,7 @@ class ZenstruckVersionExtension extends Extension
                 ),
             );
 
-            $container->getDefinition('zenstruck.version.data_collector')->clearTag('data_collector');
+            $container->getDefinition('zenstruck.version.data_collector')->clearTags();
             $container->getDefinition('zenstruck.version.data_collector')->setTags($tagForOldSymfony);
         }
 
